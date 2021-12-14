@@ -1,21 +1,25 @@
-import * as React from 'react';
-
-
-const load = () => {
-    fetch(`http://localhost:5000/getDevices`, {
-        mode: 'no-cors',
-        //method: "post",
-
-    })
-        .then(res => res)
-        .then(start => console.log(start));
-}
+import React, { useState, useEffect } from 'react';
 
 function DeviceList() {
 
+    const [devices, setDevices] = useState([]);
+
+    useEffect(
+        async() => {
+            const resp = await fetch(`http://localhost:5000/getDevices`, {
+                mode: 'no-cors',
+                //method: "post",
+
+            })
+            const res = await resp
+            console.log(res)
+        },
+        []
+    );
+
     return (
         <div>
-            {load()}
+            {devices.map(device => <h1>device.name </h1>)}
         </div>
     );
 }
